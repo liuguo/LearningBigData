@@ -1,0 +1,39 @@
+解压后修改/root/softwares/hadoops/hadoop-2.7.3/etc/hadoop路径下的配置文件
+1、修改 hadoop-env.sh
+export JAVA_HOME=/root/softwares/jdks/jdk1.8.0_102
+
+2、修改core-site.xml
+<configuration>
+        <property>
+                <name>fs.defaultFS</name>
+                <value>hdfs://NameNode:9000</value>
+        </property>
+</configuration>
+
+3、修改hdfs-site.xml
+<configuration>
+        <property>
+                <name>dfs.namenode.name.dir</name>
+                <value>/root/dfs/name</value>
+        </property>
+        <property>
+                <name>dfs.datanode.data.dir</name>
+                <value>/root/dfs/data</value>
+        </property>
+</configuration>
+
+4、配置HADOOP环境变量
+/etc/profile
+export JAVA_HOME=/root/softwares/jdks/jdk1.8.0_102
+export HADOOP_HOME=/root/softwares/hadoops/hadoop-2.7.3
+export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+注意，重载配置文件 source /etc/profile
+
+5、启动和关闭namenode和datanode
+hadoop-daemon.sh start namenode
+hadoop-daemon.sh start datanode
+
+hadoop-daemon.sh stop namenode
+hadoop-daemon.sh stop datanode
+
+测试：http://192.168.32.129:50070
