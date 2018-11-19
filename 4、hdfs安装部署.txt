@@ -36,4 +36,11 @@ hadoop-daemon.sh start datanode
 hadoop-daemon.sh stop namenode
 hadoop-daemon.sh stop datanode
 
-测试：http://192.168.32.129:50070
+6、批量启动hdfs
+vi /root/softwares/hadoops/hadoop-2.7.3/etc/hadoop/slaves
+在里面加入节点
+DataNode1
+DataNode2
+7、一键启动hdfs集群：start-dfs.sh
+
+测试hdfs是否开启成功：http://192.168.32.129:50070

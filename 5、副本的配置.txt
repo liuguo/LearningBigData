@@ -1,0 +1,17 @@
+
+1、改配置：vi /root/softwares/hadoops/hadoop-2.7.3/etc/hadoop/hdfs-site.xml
+<property>  
+    <name>dfs.namenode.secondary.http-address</name>  
+    <value>192.168.32.130:50090</value> (副本存放的地址) 
+    <description>The secondary namenode http server address and port.</description>
+</property>
+
+2、将修改过的hdfs-site.xml覆盖到其它机器
+scp hdfs-site.xml DataNode1:/root/softwares/hadoops/hadoop-2.7.3/etc/hadoop
+scp hdfs-site.xml DataNode2:/root/softwares/hadoops/hadoop-2.7.3/etc/hadoop
+
+3、重启hdfs集群
+stop-dfs.sh
+start-dfs.sh
+
+4、强制结束进程：kill -9 进程号
