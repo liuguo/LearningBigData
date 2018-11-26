@@ -1,0 +1,40 @@
+1、关闭防火墙（为了进行远程连接）
+systemctl stop firewalld
+systemctl -disable firewalld
+
+2、永久修改主机名
+vi /etc/hostname (重启电脑生效,重启命令：reboot)
+
+3、配置映射文件 
+vi /etc/hosts
+#127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+#::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.32.129 NameNode （即：ip地址 对应主机名）
+192.168.32.130 DataNode1 
+192.168.32.131 DataNode2
+ 
+4、安装JDK
+
+alt+p上传tar包：jdk-8u102-linux-x64.tar.gz
+lcd 所要发送文件所在文件夹路径
+cd Linux接送文件的文件夹路径
+put 文件名
+
+解压：tar -zxvf /root/jdk-8u102-linux-x64.tar.gz -C 解压到的文件夹
+
+5、配置环境变量
+vi /etc/profile
+export JAVA_HOME=/root/softwares/jdks/jdk1.8.0_102
+export PATH=$PATH:$JAVA_HOME/bin
+注意：修改后要重新加载环境变量 source /etc/profile
+
+6、配置ssh免密登录
+生成密钥对：ssh-keygen
+ssh-copy-id 自己的主机名
+ssh-copy-id 其它主机名
+ssh-copy-id 其它主机名
+
+7、直接将配置好的环境变量文件 /etc/profile发到其它机器
+scp -r /etc/profile 主机名:/etc
+注意：修改后要重新加载环境变量 source /etc/profile
+
