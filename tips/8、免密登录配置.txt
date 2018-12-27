@@ -1,0 +1,8 @@
+1、配置服务器地址别名
+vi /etc/hosts
+scp hosts 其它机器IP地址:$PWD
+重启 reboot
+2、生成密钥对：ssh-keygen
+ssh-copy-id 自己的主机名
+ssh-copy-id 其它主机名
+ssh-copy-id 其它主机名
