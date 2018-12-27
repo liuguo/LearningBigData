@@ -1,0 +1,19 @@
+1、修改/root/softwares/hadoops/hadoop-2.7.3/etc/hadoop/yarn-site.xml
+<configuration>
+        <property>
+                <name>yarn.resourcemanager.hostname</name>
+                <value>NameNode</value>
+        </propert>
+        <property>
+                <name>yarn.nodemanager.aux-services</name>
+                <value>mapreduce_shuffle</value>
+        </propert>
+</configuration>
+
+2、发送到其它机器
+scp yarn-site.xml DataNode1:$PWD
+scp yarn-site.xml DataNode2:$PWD
+
+3、启动,停止yarn集群
+start-yarn.sh
+stop-yarn.sh
