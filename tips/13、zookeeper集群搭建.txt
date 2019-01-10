@@ -1,0 +1,45 @@
+	
+	
+安装zookeeper集群：
+
+（1）下载安装包
+（2）上传安装包到Linux  alt+p 
+（3）	解压  tar -zxvf .tar 
+（4）	修改配置文件 
+	vi zoo.cfg 
+	dataDir=/root/hd/zookeeper-3.4.10/zkData 
+（5）启动zk   bin/zkServer.sh start 
+ (6)查看状态   bin/zkServer.sh status 
+ (7)启动客户端  bin/zkCli.sh 
+ 
+（1）	启动客户端 zkCli.sh 
+（2）	查看帮助 help 
+（3）	查看当前znode所包含的内容 
+
+
+
+
+
+完全分布式安装：
+	
+（1）下载安装包
+（2）上传安装包到Linux   alt+p 
+（3）	解压  tar -zxvf .tar 
+（4）	修改配置文件 
+vi zoo.cfg 
+dataDir=/root/hd/zookeeper-3.4.10/zkData ###############cluster############### server.1=hd09-01:2888:3888 server.2=hd09-02:2888:3888 server.3=hd09-03:2888:3888 
+（5）	添加文件myid 
+$cd zookeeper-3.4.10/zkData 
+$touch myid 
+（6）	添加内容在myid为1     $ vi myid 1 
+（7）	发送zookeeper文件到其它机器   $ scp -r zookeeper-3.4.10 hd09-02:$PWD 
+ (8)修改myid依次为2 3 
+ (9)修改环境变量 
+ vi /etc/profile   
+ export ZOOKEEPER_HOME=/root/hd/zookeeper3.4.10 export PATH=$PATH:$ZOOKEEPER_HOME/bin 
+(10)生效环境变量 
+source /etc/profile 
+(11)启动zookeeper zkServer.sh start 
+(12)查看状态 
+zkServer.sh status 
+(13)关闭zookeeper zkServer.sh stop 
