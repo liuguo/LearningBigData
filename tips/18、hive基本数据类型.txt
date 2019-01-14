@@ -1,0 +1,14 @@
+
+
+hive数据类型（不区分大小写）
+
+Java数据类型 	Hive数据类型 	长度
+byte 			TINYINT 		1byte
+short		 	SMALINT 		2byte
+int 			INT 			4byte
+long 			BIGINT 			8byte
+float 			FLOAT 			单精度浮点数
+double 			DOUBLE 			双精度浮点数
+string 			STRING 			字符
+				TIMESTAMP 		时间类型
+				BINARY 			字节数组

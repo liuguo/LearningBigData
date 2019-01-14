@@ -1,0 +1,25 @@
+
+hive基本命令
+1）查看数据库
+show databases;
+
+2) 使用数据库
+use default;
+
+3) 查看表
+show tables;
+
+4) 创建表
+create table tablename(id int,name string);
+
+5）插入数据
+insert into tablename values(1,"hunter");
+
+6) 查询
+select * from tablename;
+
+7) 删除表
+drop table tablename;
+
+8) 退出终端
+quit;
