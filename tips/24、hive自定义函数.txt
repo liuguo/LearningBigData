@@ -1,0 +1,14 @@
+三种自定义函数：
+UDF：一进一出（User-Defined-Function）
+UDAF:多进一出 （count、max、min）
+UDTF:一进多出
+（1）导入hive依赖包
+hive/lib下
+（2）上传
+alt+p
+（3）添加到hive中
+add jar /root/lower.jar;
+（4）关联
+create temporary function my_lower as "com.lg.functions.Lower";
+(5)使用
+select ename,my_lower(ename) lowername from empt;

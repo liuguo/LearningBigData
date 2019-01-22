@@ -1,0 +1,91 @@
+一、数据库操作：
+1）创建数据库
+create database hive_db;
+-》创建数据库标准写法
+create database if not exist db_hive;
+-》创建数据库指定所在hdfs路径
+create database hive_db1 location '/hive_db';
+
+2）修改数据库
+-》查看数据库结构
+desc database hive-db;
+-》添加描述信息
+alter database hive_db set dbproperties('datais'='hunter');
+-》查看拓展属性
+desc database extended hive_db;
+
+3）查询数据库
+show databases;
+-》筛选查询的数据库
+show database like 'db*';
+
+4）删除数据库
+drop dabase hive_db;
+-》删除数据库标准写法
+drop database if exists hive_db;
+
+二、表操作：
+5）创建表
+> create table db_h(id int,name string)
+> row format
+> delimited fields
+> terminated by "\t"
+
+6）管理表（内部表）
+不擅长做数据共享
+删除hive中管理表，数据删除。
+-》加载数据
+load data local inpath '/root/testdata.txt' into table emp;
+-》查询并保存到一张新的表
+create table if not exists emp2 as select * from emp where name = 'zhangsan';
+-》查询表结构
+desc formatted emp;
+Table Type: MANAGED_TABLE
+
+7）外部表
+hive不认为这张表拥有这份数据，删除该表，数据不删除。
+擅长做数据共享
+-》创建外部表
+> create external table if not exists emptable(empno int,ename string,job)
+> row format
+> delimited fields
+> terminated by '\t';
+-》导入数据
+load data local inpath '/root/emp.txt' into table emp;
+-》查看表结构
+desc formatted emp;
+Table Type: EXTERNAL_TABLE
+-》删除表
+drop table emptable;
+提示：再次创建相同的表 字段相同 将自动关联数据！
+
+8）分区表`
+-》创建分区表
+hive> create table dept_partitions(depno int,dept string,loc string)
+> partitioned by(day string)
+> row format delimited fields
+> terminated by '\t';
+-》加载数据
+load data local inpath '/root/dept.txt' into table dept_partitions;
+注意：不能直接导入需要指定分区
+load data local inpath '/root/dept.txt' into table dept_partitions partition(day='1112');
+-》添加分区
+alter table dept_partitions add partition(day='1113');
+-》单分区查询
+select * from dept_partitions where day='1112';
+-》全查询
+select * from dept_partitions;
+-》查询表结构
+desc formatted dept_partitions;
+-》删除单个分区
+alter table dept_partitions drop partition(day='1112');
+
+9）修改表
+-》修改表名
+alter table emptable rename to new_table_name;
+-》添加列
+alter table dept_partitions add columns(desc string);
+-》更新列
+alter table dept_partitions change column desc desccc int;
+-》替换
+alter table dept_partitions replace column(desccc int);
